@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>Make a reservation</h1>
+    <div class="row">
+      <div class="column">
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" id="button">
+        </form>
+      </div>
+
+      <div class="column">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <h2>Bookings For {{ current_date }}</h2>
+        <ul>
+          {% if bookings %}
+            {% for booking in bookings %}
+              <li>{{ booking.name }} - {{ booking.reservation_time }} guests</li>
+            {% endfor %}
+          {% else %}
+            <li>No bookings for today.</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
+<!-- Add external JS file -->
+<script src="{% static 'js/bookings.js' %}"></script>
+{% endblock %}

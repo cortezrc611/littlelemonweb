@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>All Reservations for {{ date }}</h1>
+    <!-- Begin row -->
+    <div class="row">
+      <!-- Begin col -->
+      <div class="column">
+        <h2>All Reservations Data</h2>
+        <!-- Loop through each reservation and display it -->
+        {% for reservation in bookings_json %}
+          <div class="row">
+            <div class="column">
+              <p><strong>Model:</strong> {{ reservation.model }}</p>
+              <p><strong>PK:</strong> {{ reservation.pk }}</p>
+              <p><strong>Name:</strong> {{ reservation.name }}</p>
+              <p><strong>Reservation Date:</strong> {{ reservation.reservation_date }}</p>
+              <p><strong>Reservation Time:</strong> {{ reservation.reservation_time }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- End col -->
+    </div>
+    <!-- End row -->
+  </article>
+</section>
+{% endblock %}

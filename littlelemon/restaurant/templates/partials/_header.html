@@ -1,0 +1,28 @@
+{% load static %}
+<header>
+  <img src="{% static 'img/logo.png' %}" alt="Logo" />
+</header>
+<nav>
+  <ul class="nav-list">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'menu' %}">Menu</a></li>
+    <li><a href="{% url 'book' %}">Book</a></li>
+    <li><a href="{% url 'reservations_data' %}">Reservation</a></li>
+
+    {% if user.is_authenticated %}
+    <li style="margin: 0 10px;">
+      <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" style="background-color: transparent; border: none; color: #007bff; cursor: pointer; font-size: 16px; padding: 0; margin: 0;">Logout</button>
+      </form>
+    </li>
+    <li style="margin-left: auto; padding-left: 20px; font-size: 16px; color: #fff;">Welcome, {{ user.username }}</li>
+    {% else %}
+    <li style="margin: 0 10px;"><a href="{% url 'sign-in' %}">Login</a></li>
+    <li style="margin: 0 10px;"><a href="{% url 'signup' %}">Sign Up</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+
